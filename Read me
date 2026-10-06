@@ -1,0 +1,38 @@
+# Demand Forecasting using XGBoost
+
+An end-to-end machine learning project for predicting product demand using historical sales, inventory, pricing, discount, promotion, and competitor pricing data.
+
+The project covers exploratory data analysis (EDA), feature engineering, categorical encoding, XGBoost regression, hyperparameter tuning using RandomizedSearchCV, model evaluation, model serialization, and deployment through a Streamlit web application.
+
+---
+
+## Project Overview
+
+Accurate demand forecasting can help businesses improve inventory planning, reduce stockouts and overstocking, and make better pricing and promotional decisions.
+
+This project uses historical demand-related data to build an XGBoost regression model that predicts **Demand** based on selected product and pricing features.
+
+### Machine Learning Workflow
+
+```text
+Raw Data
+   ↓
+Data Cleaning
+   ↓
+Exploratory Data Analysis
+   ↓
+Feature Engineering
+   ↓
+Categorical Encoding
+   ↓
+Train-Test Split
+   ↓
+XGBoost Regression
+   ↓
+Hyperparameter Tuning
+   ↓
+Model Evaluation
+   ↓
+Save Model & Encoders
+   ↓
+Streamlit Prediction App
