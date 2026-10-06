@@ -1,0 +1,301 @@
+# Demand Forecasting using XGBoost
+
+An end-to-end machine learning project for predicting product demand using historical sales, inventory, pricing, discount, promotion, and competitor pricing data.
+
+The project covers exploratory data analysis (EDA), feature engineering, categorical encoding, XGBoost regression, hyperparameter tuning using RandomizedSearchCV, model evaluation, model serialization, and deployment through a Streamlit web application.
+
+---
+
+## Project Overview
+
+Accurate demand forecasting can help businesses improve inventory planning, reduce stockouts and overstocking, and make better pricing and promotional decisions.
+
+This project uses historical demand-related data to build an XGBoost regression model that predicts **Demand** based on selected product and pricing features.
+
+### Machine Learning Workflow
+
+```text
+Raw Data
+   ↓
+Data Cleaning
+   ↓
+Exploratory Data Analysis
+   ↓
+Feature Engineering
+   ↓
+Categorical Encoding
+   ↓
+Train-Test Split
+   ↓
+XGBoost Regression
+   ↓
+Hyperparameter Tuning
+   ↓
+Model Evaluation
+   ↓
+Save Model & Encoders
+   ↓
+Streamlit Prediction App
+
+Dataset
+
+The dataset contains information related to product demand, inventory, pricing, promotions, weather, seasonality, and epidemic conditions.
+
+Main Variables
+Variable	Description
+Date	Date of the observation
+Store ID	Store identifier
+Product ID	Product identifier
+Category	Product category
+Region	Geographic region
+Inventory Level	Available inventory
+Units Sold	Number of units sold
+Units Ordered	Number of units ordered
+Price	Product price
+Discount	Discount percentage
+Weather Condition	Weather condition
+Promotion	Promotion indicator
+Competitor Pricing	Competitor price
+Seasonality	Seasonal category
+Epidemic	Epidemic indicator
+Demand	Target variable
+Exploratory Data Analysis
+
+The project performs several exploratory analyses to understand demand patterns and relationships between variables.
+
+Analyses performed
+Data type inspection
+Missing-value analysis
+Duplicate-value analysis
+Descriptive statistics
+Category-wise demand analysis
+Regional and seasonal demand analysis
+Promotion vs. demand analysis
+Monthly demand analysis
+Daily demand trends
+Demand distribution
+Inventory Level vs. Units Sold
+Demand distribution by Category
+Demand distribution by Weather Condition
+Demand vs. Discounted Price
+Demand by Seasonality
+Demand by Epidemic condition
+Feature Engineering
+
+Several additional variables were created during the analysis:
+
+Date Features
+Year
+Month
+Day
+Weekday
+Discounted Price
+
+The discounted selling price was calculated as:
+
+Discounted Price = Price × (1 − Discount / 100)
+Sell-Through Rate
+
+A sell-through rate was also calculated using:
+
+Sell-Through Rate = Units Sold / Inventory Level
+Machine Learning
+Target Variable
+Demand
+Features Used
+
+The final model uses the following six features:
+
+Category
+Inventory Level
+Price
+Discount
+Promotion
+Competitor Pricing
+Categorical Encoding
+
+The Category variable is categorical and is converted into numerical values using LabelEncoder.
+
+The trained encoder is saved so that the Streamlit application can transform new user inputs in the same way as the training data.
+
+Model
+
+The project uses XGBoost Regressor for demand prediction.
+
+XGBoost is a gradient boosting algorithm based on decision trees. Multiple trees are built sequentially, with later trees improving upon the errors made by previous trees.
+
+Hyperparameter Tuning
+
+RandomizedSearchCV is used to search for a suitable combination of model hyperparameters.
+
+The search space includes:
+
+n_estimators
+max_depth
+learning_rate
+subsample
+colsample_bytree
+min_child_weight
+
+The model is evaluated using Mean Absolute Error (MAE) during cross-validation.
+
+Model Evaluation
+
+The trained model is evaluated on the test dataset using:
+
+MAE
+
+Mean Absolute Error measures the average absolute difference between actual and predicted demand.
+
+MSE
+
+Mean Squared Error calculates the average squared prediction error.
+
+RMSE
+
+Root Mean Squared Error is the square root of MSE and expresses prediction error in the same units as demand.
+
+R² Score
+
+R² measures how much of the variation in demand is explained by the model.
+
+Streamlit Application
+
+A Streamlit application was developed to allow users to enter product and pricing information and receive a predicted demand value.
+
+User Inputs
+
+The application accepts:
+
+Category
+Inventory Level
+Price
+Discount
+Promotion
+Competitor Pricing
+
+The trained XGBoost model then generates the predicted demand.
+
+Project Structure
+demand-forecasting-streamlit/
+│
+├── app.py
+├── README.md
+├── requirements.txt
+│
+├── demand_forecasting.csv
+├── demand_forecasting_cleaned.csv
+│
+├── demand_forecasting.ipynb
+├── machine_learning.ipynb
+│
+├── xgboost_demand_model.pkl
+├── label_encoders.pkl
+│
+└── .gitignore
+Installation
+1. Clone the repository
+git clone https://github.com/ROSE1290/demand-forecasting-streamlit.git
+2. Navigate to the project
+cd demand-forecasting-streamlit
+3. Create a virtual environment
+python -m venv venv
+4. Activate the environment
+macOS / Linux
+source venv/bin/activate
+Windows
+venv\Scripts\activate
+5. Install dependencies
+pip install -r requirements.txt
+Run the Streamlit Application
+
+From the project directory:
+
+python -m streamlit run app.py
+
+The application will open in your browser.
+
+Model Artifacts
+
+The trained machine learning artifacts are stored as pickle files:
+
+xgboost_demand_model.pkl
+label_encoders.pkl
+xgboost_demand_model.pkl
+
+Contains the trained XGBoost regression model.
+
+label_encoders.pkl
+
+Contains the fitted categorical encoders used during model training.
+
+These artifacts allow the Streamlit application to make predictions without retraining the model every time it starts.
+
+Technologies Used
+Programming
+Python
+Data Analysis
+Pandas
+NumPy
+Visualization
+Matplotlib
+Seaborn
+Machine Learning
+Scikit-learn
+XGBoost
+Deployment
+Streamlit
+Development
+Jupyter Notebook
+VS Code
+Git
+GitHub
+Future Improvements
+
+Potential improvements to the project include:
+
+Incorporating additional time-series features
+Adding lag and rolling-demand features
+Comparing XGBoost with Random Forest, LightGBM, and CatBoost
+Performing more extensive hyperparameter optimization
+Adding model explainability using SHAP
+Adding interactive visualizations to the Streamlit application
+Deploying the Streamlit application online
+Monitoring model performance over time
+Author
+
+Roji Sah
+
+GitHub:
+https://github.com/ROSE1290
+
+
+---
+
+# 2. `requirements.txt`
+
+Create another file in the same folder:
+
+```text
+requirements.txt
+
+Put this inside:
+
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+xgboost
+streamlit
+Why these packages?
+Package	Purpose
+pandas	Data loading and manipulation
+numpy	Numerical calculations
+matplotlib	Visualization
+seaborn	Statistical visualization
+scikit-learn	Train/test split, encoding, tuning and evaluation
+xgboost	Demand prediction model
+streamlit	Web application
+
+You do not need pickle in requirements.txt because pickle is part of Python's standard library.
